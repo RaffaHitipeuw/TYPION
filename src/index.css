@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Fontspring';
+  src: url('./assets/Fontspring-DEMO-integralcf-heavy.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url('./assets/HelveticaNowDisplay-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
