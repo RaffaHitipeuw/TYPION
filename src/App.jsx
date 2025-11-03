@@ -1,26 +1,17 @@
-import { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import TypingBox from "./components/TypingBox";
-import ReplayPage from "./components/ReplayPage";
+
+// Components
 import SplashScreen from "./components/SplashScreen";
+import HomePage from "./components/HomePage";
 
-function App() {
-  const [showSplash, setShowSplash] = useState(true);
-
-  if (showSplash) {
-    return <SplashScreen onEnter={() => setShowSplash(false)} />;
-  }
-
+export default function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-[#white] text-white font-mono flex flex-col items-center justify-center">
-        <Routes>
-          <Route path="/" element={<TypingBox />} />
-          <Route path="/replay" element={<ReplayPage />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<SplashScreen />} />
+        <Route path="/home" element={<HomePage />} />
+      </Routes>
     </Router>
   );
 }
-
-export default App;

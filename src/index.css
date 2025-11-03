@@ -2,15 +2,21 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Fontspring';
-  src: url('./assets/Fontspring-DEMO-integralcf-heavy.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
+  font-family: 'heavy';
+  src: url('./assets/font/Fontspring-DEMO-integralcf-heavy.otf');
 }
 
 @font-face {
-  font-family: 'Helvetica';
-  src: url('./assets/HelveticaNowDisplay-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
+  font-family: 'medium';
+  src: url('./assets/font/Fontspring-DEMO-integralcf-medium.ttf');
 }
+
+@font-face {
+  font-family: 'helvetica';
+  src: url('./assets/font/HelveticaNowDisplay-Bold.otf');
+}
+
+body{
+  background-color: #2A2A2A;
+}
+

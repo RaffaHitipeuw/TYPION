@@ -1,39 +1,64 @@
-import { useEffect } from "react";
-import enterVector from "../assets/entervector.png";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import enter from "../assets/img/enterlogo.png";
 
-export default function SplashScreen({ onEnter }) {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Enter") onEnter?.();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onEnter]);
+export default function SplashScreen() {
+  const navigate = useNavigate();
+  const [fadeOut, setFadeOut] = useState(false);
+
+useEffect(() => {
+  const fadeTimer = setTimeout(() => setFadeOut(true), 4000);
+  const navTimer = setTimeout(() => navigate("/home"), 4600);
+
+  return () => {
+    clearTimeout(fadeTimer);
+    clearTimeout(navTimer);
+  };
+}, [navigate]);
+
 
   return (
-    <div className="w-full h-screen bg-white flex flex-col items-center justify-center text-[#0D1117] relative overflow-hidden">
-      <div className="relative flex items-center justify-center">
+    <div
+      className={`fixed inset-0 flex flex-col items-center justify-center
+      bg-[#2A2A2A] z-9999 
+      transition-opacity duration-700 ease-out
+      ${fadeOut ? "opacity-0" : "opacity-100"}`}
+    >
+      {/* Logo */}
+      <div className="flex items-center gap-2 animate-logo">
         <h1
-          style={{ fontFamily: "Fontspring, sans-serif" }}
-          className="text-[100px] font-bold leading-none tracking-wide text-[#0D1B2A]"
+          className="text-[60px] font-bold text-[#A6FF4D]"
+          style={{ fontFamily: "'heavy', sans-serif" }}
         >
           TYPION
         </h1>
-
-        <img
-          src={enterVector}
-          alt="Enter Arrow"
-          className="absolute ml-[390px] -mt-[60px] top-[1.05rem] w-[120px]"
-        />
+        <img src={enter} alt="logo" className="w-14 absolute ml-52 -mt-9" />
       </div>
 
-      {/* Tagline */}
-      <p
-        style={{ fontFamily: "Helvetica, sans-serif" }}
-        className="text-[#0D1B2A] text-[15px] mt-4"
-      >
-        press enter to begin
-      </p>
+      {/* Loading Bar */}
+      <div className="w-48 h-2 bg-[#3C3C3C] rounded-full mt-6 overflow-hidden">
+        <div className="h-full bg-[#A6FF4D] animate-loading"></div>
+      </div>
+
+      <style>
+        {`
+          @keyframes logo {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          .animate-logo {
+            animation: logo 0.9s ease-out forwards;
+          }
+
+          @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+          }
+          .animate-loading {
+            animation: loading 4s ease-out forwards;
+          }
+        `}
+      </style>
     </div>
   );
 }
